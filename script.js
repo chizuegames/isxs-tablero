@@ -2,7 +2,7 @@
        19. CENTRALIZED CONFIGURATION LAYER
        ========================================================================== */
 const CONFIG = {
-  themeMusic: "assets/music/theme.mp3",
+  themeMusic: "assets/music/illicit-speed-theme-min.mp3",
   boardAssets: {
     background: "assets/backgrounds/main-bg.webp",
     sidebar: "assets/backgrounds/side-bar.webp",
@@ -210,6 +210,7 @@ class AudioManager {
 
   toggleMusic() {
     if (this.musicAudio.paused) {
+      this.musicAudio.volume = 0.07;
       this.musicAudio
         .play()
         .then(() => {
