@@ -44,7 +44,7 @@ const CONFIG = {
     {
       id: "kael",
       name: "Kael",
-      portrait: "assets/portraits/Rkael.webp",
+      portrait: "assets/portraits/RKael.webp",
       voices: {
         first: "assets/voices/kael-first.mp3",
         second: "assets/voices/kael-second.mp3",
