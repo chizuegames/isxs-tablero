@@ -1,0 +1,367 @@
+/* ==========================================================================
+       11. RACER POSITION CUSTOMIZATION & ROOT VARIABLES
+       ========================================================================== */
+:root {
+  /* Race Position Asset Alignment */
+  --race-position-portrait-x: 4%;
+  --race-position-portrait-y: 50%;
+  --race-position-portrait-size: 80px;
+
+  --race-position-text-x: 24%;
+  --race-position-text-y: 50%;
+  --race-position-text-color: #ffffff;
+  --race-position-num-color: #ffffff;
+
+  /* UI Theme Colors */
+  --bg-dark: #0f121d;
+  --panel-bg: rgba(22, 27, 46, 0.55);
+  --accent-gold: #ffb703;
+  --accent-blue: #219ebc;
+  --border-glow: rgba(255, 183, 3, 0.4);
+}
+
+* {
+  box-sizing: border-box;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg-dark);
+  font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  color: #fff;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow-x: hidden;
+}
+
+/* ==========================================================================
+       12 & 13. BOARD LAYOUT & RESPONSIVE CONTAINERS
+       ========================================================================== */
+.app-container {
+  position: relative;
+  width: 100vw;
+  max-width: 1600px;
+  min-height: 100vh;
+  background: #0d1117 url("assets/backgrounds/main-bg.webp") center/cover
+    no-repeat;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.header-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background: var(--panel-bg);
+  border-radius: 12px;
+  margin-bottom: 12px;
+  border: 1px solid var(--border-glow);
+  backdrop-filter: blur(8px);
+}
+
+.tournament-title {
+  font-size: 1.5rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+  color: var(--accent-gold);
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.player-counter {
+  font-size: 1.1rem;
+  font-weight: 600;
+  background: rgba(0, 0, 0, 0.4);
+  padding: 6px 16px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.board-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 320px;
+  gap: 20px;
+  flex-grow: 1;
+  position: relative;
+  margin-top: 48px;
+}
+
+.race-column {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-left: 24px;
+}
+
+/* ==========================================================================
+       11. RACE POSITION VISUAL COMPONENT
+       ========================================================================== */
+.race-slot {
+  position: relative;
+  width: 100%;
+  height: 86px;
+  background: url("assets/backgrounds/racer-position.webp") 10% / contain
+    no-repeat;
+  background-color: rgba(15, 23, 42, 0);
+  border-radius: 10px;
+  /* border: 2px dashed rgba(255, 255, 255, 0.15); */
+  transition:
+    border-color 0.2s,
+    transform 0.15s,
+    box-shadow 0.2s;
+}
+
+.race-slot.drag-over {
+  border-color: var(--accent-gold);
+  box-shadow: 0 0 15px var(--border-glow);
+  transform: scale(1.02);
+}
+
+.slot-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  cursor: grab;
+}
+
+.slot-portrait {
+  position: absolute;
+  left: var(--race-position-portrait-x);
+  top: var(--race-position-portrait-y);
+  transform: translateY(-50%);
+  width: var(--race-position-portrait-size);
+  height: var(--race-position-portrait-size);
+  border-radius: 50%;
+  object-fit: cover;
+  /* border: 2px solid var(--accent-gold); */
+}
+
+.slot-text-area {
+  position: absolute;
+  left: var(--race-position-text-x);
+  top: var(--race-position-text-y);
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.position-number {
+  font-size: 1.4rem;
+  font-weight: 900;
+  color: var(--race-position-num-color);
+}
+
+.racer-name {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--race-position-text-color);
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+  letter-spacing: 0.5px;
+}
+
+/* ==========================================================================
+       3 & 17. RACER POOL & CONTROLS SIDEBAR
+       ========================================================================== */
+.sidebar {
+  background: url("assets/backgrounds/side-bar.webp") center/cover no-repeat;
+  background-color: var(--panel-bg);
+  border-radius: 14px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  backdrop-filter: blur(10px);
+  min-height: 500px;
+}
+
+.sidebar-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-top: 0;
+  margin-bottom: 14px;
+  color: var(--race-position-text-color);
+  text-align: center;
+  text-transform: none;
+  padding-bottom: 8px;
+}
+
+.pool-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  flex-grow: 1;
+  align-content: start;
+  padding: 8px;
+  border-radius: 8px;
+  min-height: 200px;
+}
+
+.pool-grid.drag-over {
+  background: rgba(255, 183, 3, 0.15);
+  outline: 2px dashed var(--accent-gold);
+}
+
+.racer-token {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: grab;
+  transition:
+    transform 0.15s,
+    opacity 0.2s;
+}
+
+.racer-token:hover {
+  transform: scale(1.08);
+}
+
+.racer-portrait {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  /* border: 2px solid rgba(255, 255, 255, 0.6); */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+}
+
+.racer-portrait img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* transform: scale(1.25); */
+}
+
+.racer-token img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  /* border: 2px solid rgba(255, 255, 255, 0.6); */
+  object-fit: cover;
+  /* box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); */
+  transform: scale(1.45); /* Compensate for the white space around the img*/
+}
+
+.racer-token span {
+  font-size: 0.75rem;
+  margin-top: 4px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.sidebar-controls {
+  margin-top: 20px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  justify-content: center;
+}
+
+.music-btn {
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid var(--accent-gold);
+  color: #fff;
+  padding: 10px 18px;
+  border-radius: 25px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s;
+}
+
+.music-btn:hover {
+  background: var(--accent-gold);
+  color: #000;
+}
+
+/* ==========================================================================
+       12. DECORATIVE ELEMENTS
+       ========================================================================== */
+.board-decorations {
+  position: absolute;
+  bottom: 10px;
+  right: 340px;
+  pointer-events: none;
+  display: flex;
+  align-items: flex-end;
+  gap: 15px;
+  z-index: 2;
+}
+
+.decor-curve {
+  width: 180px;
+  height: auto;
+  opacity: 0.8;
+}
+
+.decor-logo {
+  width: 140px;
+  height: auto;
+  margin-bottom: 5px;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.7));
+}
+
+/* ==========================================================================
+       21 & 22. DRAG GHOST & ANIMATIONS
+       ========================================================================== */
+.drag-ghost {
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%) scale(1.15);
+  opacity: 0.9;
+  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.8));
+}
+
+.drag-ghost img {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  border: 3px solid var(--accent-gold);
+}
+
+/* ==========================================================================
+       14. RESPONSIVE LAYOUT BREAKPOINTS
+       ========================================================================== */
+@media (max-width: 1100px) {
+  .board-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .sidebar {
+    grid-column: span 2;
+    min-height: auto;
+  }
+  .pool-grid {
+    grid-template-columns: repeat(6, 1fr);
+  }
+  .board-decorations {
+    display: none;
+  }
+}
+
+@media (max-width: 680px) {
+  .board-grid {
+    grid-template-columns: 1fr;
+  }
+  .sidebar {
+    grid-column: span 1;
+  }
+  .pool-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .tournament-title {
+    font-size: 1.1rem;
+  }
+}
