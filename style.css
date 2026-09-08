@@ -364,3 +364,20 @@ body {
     font-size: 1.1rem;
   }
 }
+
+/* Prevent the browser from hijacking the drag gesture to scroll, (Fixes the behavior on mobile) */
+.slot-content, 
+.racer-token {
+  touch-action: none; 
+  -webkit-touch-callout: none; /* Prevents the iOS "save image" popup */
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* Force the pointer events to target the container, not the image, Fix the behavior on mobile */
+.slot-portrait, 
+.racer-portrait img, 
+.racer-token img {
+  pointer-events: none; 
+  -webkit-user-drag: none; /* Disables native image ghost-dragging on desktop */
+}
